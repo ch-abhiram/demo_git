@@ -1,12 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huka</title>
+  <title>Complex UI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #ccc;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://picsum.photos/1600/900?blur=3');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero h1 {
+      font-size: 60px;
+      margin: 0;
+    }
+    .hero p {
+      font-size: 20px;
+    }
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      background: #e91e63;
+      color: white;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .form-section {
+      padding: 40px;
+      background: #111;
+    }
+    .form-section input, .form-section textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-bottom: 2px solid #e91e63;
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-content {
+      background: #222;
+      padding: 30px;
+      border-radius: 8px;
+      min-width: 300px;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-    <p>hello Huka</p>
-    <p>hello world</p>
+
+<header>
+  <div>MySite</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Welcome</h1>
+  <p>Explore the future with us</p>
+  <button class="btn" onclick="openModal()">Get Started</button>
+</div>
+
+<section class="cards">
+  <div class="card">Tech Innovation</div>
+  <div class="card">AI & ML</div>
+  <div class="card">Blockchain</div>
+  <div class="card">Design & UX</div>
+</section>
+
+<section class="form-section">
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea rows="4" placeholder="Your Message"></textarea>
+    <button class="btn" type="submit">Send</button>
+  </form>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Thank You!</h3>
+    <p>We’ll get back to you soon.</p>
+    <button class="btn" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 MySite. All rights reserved.
+</footer>
+
+<script>
+  function openModal() {
+    document.getElementById('modal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    openModal();
+    this.reset();
+  });
+</script>
+
 </body>
 </html>
